@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Menu : MonoBehaviour
 {
-    // 用作问号面板的打开和关闭
-    private int count = 0;
 
     // dna panel
     public GameObject dnaMenu;
@@ -28,7 +26,6 @@ public class Menu : MonoBehaviour
         pauseDialog.SetActive(false);
         promptDialog.SetActive(false);
         dnaMenu.SetActive(true);
-        Time.timeScale = 0f;
     }
 
     public void ClearDnaMenu()
@@ -36,37 +33,26 @@ public class Menu : MonoBehaviour
         pauseDialog.SetActive(false);
         promptDialog.SetActive(false);
         dnaMenu.SetActive(false);
-        Time.timeScale = 1f;
     }
 
     public void DisplayPauseMenu()
     {
-        pauseDialog.SetActive(true);
         promptDialog.SetActive(false);
         dnaMenu.SetActive(false);
-        Time.timeScale = 0f;
+        pauseDialog.SetActive(true);
     }
 
-    public void ClearPauseMenu()
+    public void ResumeGame()
     {
         pauseDialog.SetActive(false);
         promptDialog.SetActive(false);
         dnaMenu.SetActive(false);
-        Time.timeScale = 1f;
     }
 
-    public void PromptPanel()
+    public void DisplayPromptPanel()
     {
-        if (count % 2 == 0)
-        {
-            dnaMenu.SetActive(false);
-            pauseDialog.SetActive(false);
-            promptDialog.SetActive(true);
-        }
-        else
-        {
-            promptDialog.SetActive(false);
-        }
-        count++;
+        dnaMenu.SetActive(false);
+        pauseDialog.SetActive(false);
+        promptDialog.SetActive(true);
     }
 }
