@@ -123,7 +123,7 @@ public class Health : MonoBehaviour
     }
 
     //玩家受伤
-    void BeDamaged(int damage)
+    public void BeDamaged(int damage)
     {
         if(curShield > 0)
         {

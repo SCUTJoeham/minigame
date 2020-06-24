@@ -32,8 +32,8 @@ public class PlayerController : MonoBehaviour
     // 二段跳
     int m_jumpTimes;
 
-    public GameObject pfb_bullet;
-    public GameObject pfb_bullet2;
+    public Rigidbody2D pfb_bullet;
+    public Rigidbody2D pfb_bullet2;
     public Vector2 bulletSpeed = new Vector2(5, 0);
 
     bool change = false;
@@ -138,12 +138,12 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Shoot") && ShootTime >= ShootInterval)
         {
             ShootTime = 0;
-            GameObject obj;
+            Rigidbody2D obj;
             if (change)
-                obj = Instantiate(pfb_bullet2, transform.position, Quaternion.identity);
+                obj = (Rigidbody2D)Instantiate(pfb_bullet2, transform.position, Quaternion.identity);
             else
-                obj = Instantiate(pfb_bullet, transform.position, Quaternion.identity);
-            obj.GetComponent<Rigidbody2D>().velocity = m_FacingRight ? bulletSpeed : -1 * bulletSpeed;
+                obj = (Rigidbody2D)Instantiate(pfb_bullet, transform.position, Quaternion.identity);
+            obj.velocity = m_FacingRight ? bulletSpeed : -1 * bulletSpeed;
         }
     }
 
