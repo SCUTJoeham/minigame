@@ -166,8 +166,7 @@ public class Health : MonoBehaviour
         Invoke("Restart", 1);
     }
 
-    void Restart()
-    {
+    void Restart(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
