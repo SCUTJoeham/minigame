@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Virus_Three : MonoBehaviour
 {
+    private Animator freeze_anim;
+    public GameObject BoomAnim;
+    private GameObject clone;
     private GameObject my_player;//玩家
     public float speed = 3.0f;//怪物速度
     public float power = 5.0f;//子弹速度
@@ -15,6 +18,7 @@ public class Virus_Three : MonoBehaviour
     int ice_counter = 1;//冰冻子弹可受击数
     int health = 1;//普通子弹可受击数
     int shoot_counter;//射速
+    bool isBoom = false;
     
     void Start()
     {
@@ -25,11 +29,16 @@ public class Virus_Three : MonoBehaviour
         isFrozen = false;
         beforeX = transform.position.x;//记录初始x值
         my_player = GameObject.FindWithTag("Player");//TODO: 改为玩家Tag
+        freeze_anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (isFrozen) return;
+        if (isFrozen)
+        {
+            freeze_anim.SetBool("isFrozen", true);
+            return;
+        }
         Detect();
     }
 
@@ -41,11 +50,32 @@ public class Virus_Three : MonoBehaviour
         float dist = (p.x - nowX) * (p.x - nowX) + (p.y - nowY) * (p.y - nowY);
         if (dist <= bound_detect)
         {
-            transform.Translate((p - transform.position) * Time.deltaTime * 20.0f);
+            //transform.Translate((p - transform.position) * Time.deltaTime * 20.0f);
+            Boom();
             return true;
         }
         else
             return false;
+    }
+
+    void Boom()
+    {
+        if (isBoom == true) return;
+        isBoom = true;
+        clone = Instantiate(BoomAnim, transform.position, transform.rotation);
+        GameObject boom_anim = clone;
+        foreach(Transform child in clone.GetComponent<Transform>())
+        {
+            boom_anim = child.gameObject;
+        }
+        AnimatorStateInfo anim_state = boom_anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0); ;
+        while (anim_state.normalizedTime >= 1.0f)
+        {
+            anim_state = boom_anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        }
+        Destroy(clone,1.0f);
+        my_player.GetComponent<Health>().BeDamaged(5);
+        Destroy(gameObject,1.0f);
     }
 
     private void OnCollisionEnter2D(Collision2D coll)

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Virus_One : MonoBehaviour
 {
+    private Animator freeze_anim;
     public Rigidbody2D virus_bullet;
     private GameObject my_player;//玩家
     public float speed = 3.0f;//怪物速度
     public float power = 5.0f;//子弹速度
     public float bound_detect = 8.0f;//侦察范围
-    float boundX, boundY;//巡逻范围
+    public float boundX = 4.0f;
+    float boundY;//巡逻范围
     float dir;//方向
     float beforeX;//初始位置
     bool isFrozen;//冰冻状态
@@ -26,11 +28,16 @@ public class Virus_One : MonoBehaviour
         isFrozen = false;
         beforeX = transform.position.x;//记录初始x值
         my_player = GameObject.FindWithTag("Player");
+        freeze_anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-        if (isFrozen) return;
+        if (isFrozen) 
+        {
+            freeze_anim.SetBool("isFrozen", true);
+            return; 
+        }
         if (Detect())
         {
             if (canShoot())

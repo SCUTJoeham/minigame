@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Health : MonoBehaviour
 {
     public int maxLive = 3;
-    int initLive = 3;
+    int initLive = 100;
     int curLive;
 
     public int maxShield = 1;

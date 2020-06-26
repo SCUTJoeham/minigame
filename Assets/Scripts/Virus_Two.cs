@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Virus_Two : MonoBehaviour
 {
+    private Animator freeze_anim;
     private GameObject my_player;
     public float speed = 3.0f;
     public float bound_detect = 8.0f;//侦察范围
@@ -22,11 +23,16 @@ public class Virus_Two : MonoBehaviour
         isFrozen = false;
         beforeX = transform.position.x;//记录初始x值
         my_player = GameObject.FindWithTag("Player");//TODO: 改为玩家Tag
+        freeze_anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
     {
-        if (isFrozen) return;
+        if (isFrozen)
+        {
+            freeze_anim.SetBool("isFrozen", true);
+            return;
+        }
         float nowX = transform.position.x;
         if (Detect())
         {
