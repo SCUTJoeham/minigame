@@ -14,6 +14,8 @@ public class ShipCtril2 : MonoBehaviour
     Transform trans;
     Vector3 stopPosiiton;
 
+    public AudioSource shipAudio;
+
     void OnCollisionEnter2D(Collision2D coll) {
         if (coll.collider.tag == "Player") {
             //Vector2 vel2D = new Vector2(speed.x, speed.y);
@@ -49,6 +51,7 @@ public class ShipCtril2 : MonoBehaviour
             m_player.SendMessage("UseFuel", null, SendMessageOptions.DontRequireReceiver);
             moveTime += 10.0f;
             isGo = true;
+            shipAudio.Play();
         }
 
         Move();
@@ -59,16 +62,16 @@ public class ShipCtril2 : MonoBehaviour
             Vector3 tempPosition = transform.position;
             tempPosition = Vector3.MoveTowards(tempPosition, stopPosiiton, speed * Time.deltaTime);
             transform.position = tempPosition;
-
             moveTime -= Time.deltaTime;
+            
             //rbody.MovePosition(trans.position + speed * Time.deltaTime);
         }
         if (isGo && moveTime > 0) {
             Vector3 tempPosition = transform.position;
             tempPosition = Vector3.MoveTowards(tempPosition, stopPosiiton, speed * Time.deltaTime);
             transform.position = tempPosition;
-
             moveTime -= Time.deltaTime;
+            
             //rbody.MovePosition(trans.position + speed * Time.deltaTime);
         }
     }

@@ -17,7 +17,7 @@ public class spike : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         //Debug.Log(other.name);
         if (other.name == targetName) {
-            other.gameObject.SendMessage("BeDamaged", 1);
+            other.gameObject.SendMessage("BeDamaged", 1, SendMessageOptions.DontRequireReceiver);
             Debug.Log(1);
         }
     }

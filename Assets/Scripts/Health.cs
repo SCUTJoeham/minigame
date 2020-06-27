@@ -17,7 +17,7 @@ public class Health : MonoBehaviour
     float ChargeInterval = 15.0f;
     float ChargeTime = 0;
 
-    public static int DNA = 5;
+    public static int DNA = 100;
 
     public Text liveNum;
     public Text dnaNum;
@@ -26,6 +26,11 @@ public class Health : MonoBehaviour
     Renderer myRender;
     public int blinks;
     public float time;
+
+    public AudioSource dnaAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
+    public AudioSource upgradeAudio;
 
     void Start()
     {
@@ -38,6 +43,8 @@ public class Health : MonoBehaviour
     void Update()
     {
         ChargeShield();
+        UpgradeShield1();
+        UpgradeShield2();
     }
 
 
@@ -67,6 +74,7 @@ public class Health : MonoBehaviour
     void GetDNA(int dna)
     {
         DNA += dna;
+        dnaAudio.Play();
         UpdateUI();
     }
 
@@ -77,18 +85,20 @@ public class Health : MonoBehaviour
         {
             if (ChargeInterval == 15.0f)
             {
-                if (DNA >= 20)
+                if (DNA >= 10)
                 {
-                    DNA -= 20;
+                    DNA -= 10;
                     ChargeInterval -= 5.0f;
+                    upgradeAudio.Play();
                 }
             }
             else if (ChargeInterval == 10.0f)
             {
-                if (DNA >= 30)
+                if (DNA >= 20)
                 {
-                    DNA -= 30;
+                    DNA -= 20;
                     ChargeInterval -= 5.0f;
+                    upgradeAudio.Play();
                 }
             }
         }
@@ -102,18 +112,20 @@ public class Health : MonoBehaviour
         {
             if (maxShield == 1)
             {
-                if (DNA >= 30)
+                if (DNA >= 10)
                 {
-                    DNA -= 30;
+                    DNA -= 10;
                     maxShield += 1;
+                    upgradeAudio.Play();
                 }
             }
             else if (maxShield == 2)
             {
-                if (DNA >= 40)
+                if (DNA >= 20)
                 {
-                    DNA -= 40;
+                    DNA -= 20;
                     maxShield += 1;
+                    upgradeAudio.Play();
                 }
             }
         }
@@ -140,6 +152,7 @@ public class Health : MonoBehaviour
         if (curShield > damage)
         {
             curShield -= damage;
+            hurtAudio.Play();
             BlinkPlayer(blinks, time);
             UpdateUI();
             return;
@@ -152,6 +165,7 @@ public class Health : MonoBehaviour
             if (curLive > rest)
             {
                 curLive -= rest;
+                hurtAudio.Play();
                 BlinkPlayer(blinks, time);
                 UpdateUI();
                 return;
@@ -159,6 +173,7 @@ public class Health : MonoBehaviour
             if (curLive <= rest)
             {
                 curLive -= curLive;
+                hurtAudio.Play();
                 BlinkPlayer(blinks, time);
                 UpdateUI();
                 BeDie();
@@ -186,8 +201,8 @@ public class Health : MonoBehaviour
     // 玩家死亡
     void BeDie()
     {
-        //Destroy(gameObject);
-        Invoke("Restart", 1);
+        deathAudio.Play();
+        Invoke("Restart", 1.5f);
     }
 
     void Restart()

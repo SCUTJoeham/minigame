@@ -5,8 +5,9 @@ using UnityEngine;
 public class DNA : MonoBehaviour
 {
     public string playerName;
+
     void Start(){
-        
+       
     }
 
     // Update is called once per frame

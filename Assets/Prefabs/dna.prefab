@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1822251606741714682}
   - component: {fileID: 1822251606741714681}
-  - component: {fileID: -5967485721734483679}
   m_Layer: 0
   m_Name: dna
   m_TagString: Untagged
@@ -82,15 +81,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5967485721734483679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822251606741714680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 576eb4de62762714bbd26e44a5c05d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

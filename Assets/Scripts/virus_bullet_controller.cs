@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class virus_bullet_controller : MonoBehaviour
 {
-    private GameObject my_player;
+    //private GameObject my_player;
     int counter = 1000;//子弹生命周期
 
     void Start()
     {
-        my_player = GameObject.FindWithTag("Player");
+        //my_player = GameObject.FindWithTag("Player");
     }
 
     void FixedUpdate()
@@ -26,7 +26,8 @@ public class virus_bullet_controller : MonoBehaviour
             Destroy(gameObject);
         if (coll.collider.tag == "Player")
         {
-            my_player.GetComponent<Health>().BeDamaged(1);
+            coll.collider.SendMessage("BeDamaged", 1, SendMessageOptions.DontRequireReceiver);
+            //my_player.GetComponent<Health>().BeDamaged(1);
             Destroy(gameObject);
         }
     }

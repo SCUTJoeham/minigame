@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
 
     bool m_FacingRight = true;
 
-    public float m_Speed = 1500f;
-    public float m_jumpForce = 8.0f;
+    public float m_Speed = 1000f;
+    public float m_jumpForce = 9.0f;
 
     public float m_CanJumpTime = 0.2f;
     float m_JumpTimer;
@@ -38,11 +38,16 @@ public class PlayerController : MonoBehaviour
     public Vector2 bulletSpeed = new Vector2(15, 0);
 
     bool change = false;
-    float ShootInterval = 1.0f;  //控制射速
+    float ShootInterval = 1.5f;  //控制射速
     float ShootTime = 0;
 
     public int fuel = 0;
     public Text fuelNum;
+
+    public AudioSource jumpAudio;
+    public AudioSource fireAudio;
+    public AudioSource upgradeAudio;
+    public AudioSource changeAudio;
 
     void Awake()
     {
@@ -97,6 +102,7 @@ public class PlayerController : MonoBehaviour
                 m_isGrounded = false;
                 m_vec.x = m_body.velocity.x;
                 m_body.velocity = m_vec;
+                jumpAudio.Play();
             }
             else if (m_jumpTimes == 1)
             {
@@ -107,6 +113,7 @@ public class PlayerController : MonoBehaviour
                 m_isGrounded = false;
                 m_vec.x = m_body.velocity.x;
                 m_body.velocity = m_vec;
+                jumpAudio.Play();
             }
 
         }
@@ -151,6 +158,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Change"))
         {
             change = change ^ true;
+            changeAudio.Play();
         }
     }
 
@@ -165,6 +173,7 @@ public class PlayerController : MonoBehaviour
                 obj = (Rigidbody2D)Instantiate(pfb_bullet2, transform.position, Quaternion.identity);
             else
                 obj = (Rigidbody2D)Instantiate(pfb_bullet, transform.position, Quaternion.identity);
+            fireAudio.Play();
             obj.velocity = m_FacingRight ? bulletSpeed : -1 * bulletSpeed;
         }
     }
@@ -176,18 +185,20 @@ public class PlayerController : MonoBehaviour
         {
             if (ShootInterval == 1.5f)
             {
-                if (Health.DNA >= 25)
+                if (Health.DNA >= 10)
                 {
-                    Health.DNA -= 25;
+                    Health.DNA -= 10;
                     ShootInterval -= 0.5f;
+                    upgradeAudio.Play();
                 }
             }
             else if (ShootInterval == 1.0f)
             {
-                if (Health.DNA >= 35)
+                if (Health.DNA >= 20)
                 {
-                    Health.DNA -= 35;
+                    Health.DNA -= 20;
                     ShootInterval -= 0.5f;
+                    upgradeAudio.Play();
                 }
             }
         }

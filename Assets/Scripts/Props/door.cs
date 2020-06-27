@@ -10,6 +10,8 @@ public class door : MonoBehaviour
     //BoxCollider2D childrenBound;
     public string childName;
 
+    public AudioSource doorAudio;
+
     GameObject child;
     void Start(){
         //childrenBound = GetComponentInChildren<BoxCollider2D>();
@@ -31,6 +33,7 @@ public class door : MonoBehaviour
             //child.GetComponent<BoxCollider2D>.
             child.SetActive(false);
             //childrenBound.enabled = false;
+            doorAudio.Play();
         }
    
     }

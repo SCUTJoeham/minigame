@@ -13,6 +13,8 @@ public class rayControl : MonoBehaviour {
 
     Vector2 newPos;
 
+    public AudioSource rayAudio;
+
     void Start() {
         t2 = 0;
         newPos = new Vector2(transform.position.x + detX, transform.position.y + detY);
@@ -24,7 +26,7 @@ public class rayControl : MonoBehaviour {
 
         if (t2 <= 0) {
             GameObject ray0 = Instantiate(ray, newPos, transform.rotation);
-
+            rayAudio.Play();
             t2 = deltaT;
         }
     }

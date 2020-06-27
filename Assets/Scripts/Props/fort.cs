@@ -17,6 +17,8 @@ public class fort : MonoBehaviour {
     bool isFire;
     Animator mAnim;
 
+    public AudioSource fortAudio;
+
     void Start() {
         t4 = fireDetT;
         t3 = fireT;
@@ -53,6 +55,7 @@ public class fort : MonoBehaviour {
 
     private void fire() {
         GameObject controlBull = Instantiate(fortBullet, transform.position, transform.rotation);
+        fortAudio.Play();
     }
     // Update is called once per frame
     void Update() {

@@ -21,6 +21,8 @@ public class gas : MonoBehaviour{
     Animator mAnim;
     float t2;
     GameObject child;
+
+    public AudioSource gasAudio;
     
     void Start(){
         player = GameObject.Find(playerName);
@@ -60,6 +62,7 @@ public class gas : MonoBehaviour{
             else if (playerClose && !monsterClose && fuel == 1) {
                 mAnim.SetBool("fail", true);
                 child.SetActive(false);
+                gasAudio.Play();
                 player.SendMessage("BeDie");
                 //Debug.Log("fail");
                 //send message to player

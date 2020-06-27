@@ -14,6 +14,9 @@ public class waterControl : MonoBehaviour
     bool sw0;//开关0的状态
     bool sw1;
     int state;//0代表水在左边，1代表水在中间，2代表水在右边
+
+    public AudioSource waterAudio;
+
     void Start(){
         sw0 = false;
         sw1 = false;
@@ -116,15 +119,16 @@ public class waterControl : MonoBehaviour
             switch (state) {
                 case 0:
                     objWater = Instantiate(water, waterPos0, transform.rotation);
+                    waterAudio.Play();
                     //box0.SendMessage("getWater", true);
                     break;
                 case 1:
                     objWater = Instantiate(water, waterPos1, transform.rotation);
-
+                    waterAudio.Play();
                     break;
                 case 2:
                     objWater = Instantiate(water, waterPos2, transform.rotation);
-
+                    waterAudio.Play();
                     //box2.SendMessage("getWater", true);
                     break;
             }

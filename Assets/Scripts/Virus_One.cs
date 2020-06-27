@@ -15,7 +15,7 @@ public class Virus_One : MonoBehaviour {
     float beforeX;//初始位置
     bool isFrozen;//冰冻状态
     int ice_counter = 3;//冰冻子弹可受击数
-    int health = 5;//普通子弹可受击数
+    int health = 3;//普通子弹可受击数
     int shoot_counter;//射速
 
     void Start() {

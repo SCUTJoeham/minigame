@@ -10,7 +10,9 @@ public class Bullet : MonoBehaviour
     {
         //collision.SendMessage("BeShot", bullet_damage, SendMessageOptions.DontRequireReceiver);
         if (coll.collider.tag == "Virus")
-            Destroy(gameObject);          
+            Destroy(gameObject);
+        if (coll.gameObject.layer == 8)
+            Destroy(gameObject);
     }
 
     // Start is called before the first frame update

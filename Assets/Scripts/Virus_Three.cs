@@ -17,9 +17,11 @@ public class Virus_Three : MonoBehaviour {
     float beforeX;//初始位置
     bool isFrozen;//冰冻状态
     int ice_counter = 1;//冰冻子弹可受击数
-    int health = 1;//普通子弹可受击数
+    int health = 2;//普通子弹可受击数
     int shoot_counter;//射速
     bool isBoom = false;
+
+    protected AudioSource exploAudio;
 
     void Start() {
         dir = -1.0f;
@@ -30,6 +32,7 @@ public class Virus_Three : MonoBehaviour {
         beforeX = transform.position.x;//记录初始x值
         my_player = GameObject.FindWithTag("Player");//TODO: 改为玩家Tag
         freeze_anim = GetComponent<Animator>();
+        exploAudio = GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -68,6 +71,7 @@ public class Virus_Three : MonoBehaviour {
         }
         Destroy(clone, 1.0f);
         my_player.GetComponent<Health>().BeDamaged(5);
+        exploAudio.Play();
         Destroy(gameObject, 1.0f);
     }
 

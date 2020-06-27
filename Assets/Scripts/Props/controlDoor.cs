@@ -7,6 +7,7 @@ public class controlDoor : MonoBehaviour
     Animator mAnim;
     bool isOpen;
 
+    public AudioSource doorAudio;
 
     void Start(){
         mAnim = GetComponent<Animator>();
@@ -21,5 +22,6 @@ public class controlDoor : MonoBehaviour
         isOpen = true;
         mAnim.SetBool("open", true);
         GetComponent<Collider2D>().enabled = false;
+        doorAudio.Play();
     }
 }
