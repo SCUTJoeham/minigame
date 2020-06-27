@@ -24,6 +24,8 @@ public class waterControl : MonoBehaviour
     void Update(){
         //Debug.Log(state);
         int prevState = state;
+
+
         if (sw0) {//sw0打开时，水从0流向1
             switch (state) {
                 case 0:
@@ -96,8 +98,10 @@ public class waterControl : MonoBehaviour
                     break;
             }
         }
+        //Debug.Log(state);
 
         if (state != prevState) {
+            Debug.Log(state);
             Destroy(objWater, 0.0f);
             switch (prevState) {
                 case 0:
@@ -116,9 +120,11 @@ public class waterControl : MonoBehaviour
                     break;
                 case 1:
                     objWater = Instantiate(water, waterPos1, transform.rotation);
+
                     break;
                 case 2:
                     objWater = Instantiate(water, waterPos2, transform.rotation);
+
                     //box2.SendMessage("getWater", true);
                     break;
             }
@@ -126,10 +132,12 @@ public class waterControl : MonoBehaviour
     }
 
     void getMessageFromSw0(bool message) {
+        //Debug.Log(state);
         sw0 = message;
     }
 
     void getMessageFromSw1(bool message) {
+        Debug.Log(state);
         sw1 = message;
     }
 }

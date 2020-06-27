@@ -10,6 +10,8 @@ public class Virus_Three : MonoBehaviour {
     public float speed = 3.0f;//怪物速度
     public float power = 5.0f;//子弹速度
     public float bound_detect = 64.0f;//侦察范围
+
+
     float boundX, boundY;//巡逻范围
     float dir;//方向
     float beforeX;//初始位置
@@ -72,8 +74,10 @@ public class Virus_Three : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D coll) {
         if (coll.collider.tag == "IceBullet")//TODO: 改为冰冻子弹Tag
         {
-            if (--ice_counter == 0)
+            if (--ice_counter == 0) {
                 isFrozen = true;
+                gameObject.layer = 8;
+            }
         }
         if (coll.collider.tag == "NormalBullet")//TODO: 改为普通子弹Tag
         {

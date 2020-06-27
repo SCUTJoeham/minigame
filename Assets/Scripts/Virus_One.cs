@@ -106,8 +106,11 @@ public class Virus_One : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D coll) {
         if (coll.collider.tag == "IceBullet")//TODO: 改为冰冻子弹Tag
         {
-            if (--ice_counter <= 0)
+            if (--ice_counter <= 0) {
+                gameObject.layer = 8;
                 isFrozen = true;
+            }
+                //isFrozen = true;
         }
         if (coll.collider.tag == "NormalBullet")//TODO: 改为普通子弹Tag
         {

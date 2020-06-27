@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8777091054416096320}
   - component: {fileID: 7656869629412067451}
   - component: {fileID: 647116623472977510}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: virus_3
   m_TagString: Virus
   m_Icon: {fileID: 0}
@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545547836529692856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.94, y: -11.11, z: 0}
-  m_LocalScale: {x: 0.42315263, y: 0.3443062, z: 1}
+  m_LocalPosition: {x: -8.3, y: -17.634, z: 0}
+  m_LocalScale: {x: 0.65281826, y: 0.61089236, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -139,7 +139,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.40623924, y: -0.3100313}
+  m_Offset: {x: 0.32088065, y: -0.41015804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -150,7 +150,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7527249, y: 3.33662}
+  m_Size: {x: 2.507369, y: 3.2849615}
   m_EdgeRadius: 0
 --- !u!114 &647116623472977510
 MonoBehaviour:
