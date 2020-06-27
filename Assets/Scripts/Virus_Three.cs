@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Virus_Three : MonoBehaviour
-{
+public class Virus_Three : MonoBehaviour {
     private Animator freeze_anim;
     public GameObject BoomAnim;
     private GameObject clone;
@@ -19,9 +18,8 @@ public class Virus_Three : MonoBehaviour
     int health = 1;//普通子弹可受击数
     int shoot_counter;//射速
     bool isBoom = false;
-    
-    void Start()
-    {
+
+    void Start() {
         dir = -1.0f;
         boundX = 4.0f;
         boundY = 0.5f;
@@ -32,24 +30,20 @@ public class Virus_Three : MonoBehaviour
         freeze_anim = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        if (isFrozen)
-        {
+    void Update() {
+        if (isFrozen) {
             freeze_anim.SetBool("isFrozen", true);
             return;
         }
         Detect();
     }
 
-    bool Detect()
-    {
+    bool Detect() {
         Vector3 p = my_player.GetComponent<Transform>().position;
         float nowX = transform.position.x;
         float nowY = transform.position.y;
         float dist = (p.x - nowX) * (p.x - nowX) + (p.y - nowY) * (p.y - nowY);
-        if (dist <= bound_detect)
-        {
+        if (dist <= bound_detect) {
             //transform.Translate((p - transform.position) * Time.deltaTime * 20.0f);
             Boom();
             return true;
@@ -58,28 +52,24 @@ public class Virus_Three : MonoBehaviour
             return false;
     }
 
-    void Boom()
-    {
+    void Boom() {
         if (isBoom == true) return;
         isBoom = true;
         clone = Instantiate(BoomAnim, transform.position, transform.rotation);
         GameObject boom_anim = clone;
-        foreach(Transform child in clone.GetComponent<Transform>())
-        {
+        foreach (Transform child in clone.GetComponent<Transform>()) {
             boom_anim = child.gameObject;
         }
         AnimatorStateInfo anim_state = boom_anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0); ;
-        while (anim_state.normalizedTime >= 1.0f)
-        {
+        while (anim_state.normalizedTime >= 1.0f) {
             anim_state = boom_anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
         }
-        Destroy(clone,1.0f);
+        Destroy(clone, 1.0f);
         my_player.GetComponent<Health>().BeDamaged(5);
-        Destroy(gameObject,1.0f);
+        Destroy(gameObject, 1.0f);
     }
 
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
+    private void OnCollisionEnter2D(Collision2D coll) {
         if (coll.collider.tag == "IceBullet")//TODO: 改为冰冻子弹Tag
         {
             if (--ice_counter == 0)
@@ -92,8 +82,7 @@ public class Virus_Three : MonoBehaviour
         }
         if (coll.collider.tag == "Player")//TODO: 改为玩家Tag
         {
-            if (isFrozen == false)
-            {
+            if (isFrozen == false) {
                 my_player.GetComponent<Health>().BeDamaged(5);
                 Destroy(gameObject);
             }

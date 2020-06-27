@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Virus_One : MonoBehaviour
-{
+public class Virus_One : MonoBehaviour {
     private Animator freeze_anim;
     public Rigidbody2D virus_bullet;
     private GameObject my_player;//玩家
@@ -19,8 +18,7 @@ public class Virus_One : MonoBehaviour
     int health = 5;//普通子弹可受击数
     int shoot_counter;//射速
 
-    void Start()
-    {
+    void Start() {
         dir = -1.0f;
         boundX = 4.0f;
         boundY = 0.5f;
@@ -31,56 +29,45 @@ public class Virus_One : MonoBehaviour
         freeze_anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
-    {
-        if (isFrozen) 
-        {
+    void FixedUpdate() {
+        if (isFrozen) {
             freeze_anim.SetBool("isFrozen", true);
-            return; 
+            return;
         }
-        if (Detect())
-        {
+        if (Detect()) {
             if (canShoot())
                 Shoot();
         }
-        else
-        {
+        else {
             shoot_counter = 10;//重置计数器
             Patrol();
         }
     }
 
-    bool canShoot()
-    {
-        if (--shoot_counter <= 0)
-        {
+    bool canShoot() {
+        if (--shoot_counter <= 0) {
             shoot_counter = 100;
             return true;
         }
-        else
-        {
+        else {
             return false;
         }
     }
 
-    void Shoot()
-    {
+    void Shoot() {
         Rigidbody2D clone;
         clone = (Rigidbody2D)Instantiate(virus_bullet, transform.position + new Vector3(dir, 0, 0), transform.rotation);
         clone.velocity = transform.TransformDirection(new Vector2(dir, 0) * power);
     }
 
-    void Patrol()
-    {
+    void Patrol() {
         float nowX = transform.position.x;
         float nowY = transform.position.y;
-        if (transform.position.x <= beforeX - boundX)
-        {
+        if (transform.position.x <= beforeX - boundX) {
             nowX = beforeX - boundX;
             TurnAround();
         }
-        else if (transform.position.x >= beforeX + boundX)
-        {
+        else if (transform.position.x >= beforeX + boundX) {
             nowX = beforeX + boundX;
             TurnAround();
         }
@@ -89,14 +76,12 @@ public class Virus_One : MonoBehaviour
         transform.Translate(new Vector3(dir, 0, 0) * Time.deltaTime * speed);
     }
 
-    bool Detect()
-    {
+    bool Detect() {
         Vector3 p = my_player.GetComponent<Transform>().position;
         float nowX = transform.position.x;
         float nowY = transform.position.y;
         if (nowX - bound_detect < p.x && p.x < nowX + bound_detect
-            && nowY - boundY < p.y && p.y < nowY + boundY)
-        {
+            && nowY - boundY < p.y && p.y < nowY + boundY) {
             findAndFlip();
             return true;
         }
@@ -104,25 +89,21 @@ public class Virus_One : MonoBehaviour
             return false;
     }
 
-    void findAndFlip()
-    {
+    void findAndFlip() {
         Vector3 p = my_player.GetComponent<Transform>().position;
         float nowX = transform.position.x;
         if (dir > 0 && p.x < nowX
-                || dir < 0 && p.x > nowX)
-        {
+                || dir < 0 && p.x > nowX) {
             TurnAround();
         }
     }
 
-    void TurnAround()
-    {
+    void TurnAround() {
         dir = -dir;
         GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
     }
 
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
+    private void OnCollisionEnter2D(Collision2D coll) {
         if (coll.collider.tag == "IceBullet")//TODO: 改为冰冻子弹Tag
         {
             if (--ice_counter <= 0)
@@ -135,8 +116,7 @@ public class Virus_One : MonoBehaviour
         }
         if (coll.collider.tag == "Player")//TODO: 改为玩家Tag
         {
-            if(isFrozen == false)
-            {
+            if (isFrozen == false) {
                 my_player.GetComponent<Health>().BeDamaged(1);
                 Destroy(gameObject);
             }

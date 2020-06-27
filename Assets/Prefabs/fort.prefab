@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7312479054812029003}
   - component: {fileID: 7312479054812029013}
   m_Layer: 0
-  m_Name: fort_1
+  m_Name: fort
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -51457793
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -1431478181623131764, guid: 52d051fe9f26bd3429586fb01f540ce2,
     type: 3}
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 7312479054812029002}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da84ecd4ab529cf4b845d639cd773dda, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

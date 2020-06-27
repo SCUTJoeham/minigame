@@ -7,6 +7,8 @@ TagManager:
   - IceBullet
   - NormalBullet
   - Virus
+  - Box
+  - boxwater
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Player
   - Enemy
   - Bullet
-  - Background
-  - 
+  - EnemyBullet
+  - Props
   - 
   - 
   - 
@@ -43,4 +45,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2341950291
+    locked: 0
+  - name: Foreground
+    uniqueID: 4243509503
     locked: 0

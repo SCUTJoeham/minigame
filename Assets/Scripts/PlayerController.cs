@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,19 +9,19 @@ public class PlayerController : MonoBehaviour
     bool m_isWalled;
 
     public LayerMask m_groundLayer;
-    public float m_groundCheckDistance = 0.4f;
+    public float m_groundCheckDistance = 1.2f;
 
     public Transform m_headCheck;
     public Transform m_footCheck;
-    public float m_wallCheckDistance = 0.4f;
+    public float m_wallCheckDistance = 1.2f;
 
     Animator m_anim;
     Rigidbody2D m_body;
 
     bool m_FacingRight = true;
 
-    public float m_Speed = 500f;
-    public float m_jumpForce = 5f;
+    public float m_Speed = 1500f;
+    public float m_jumpForce = 8.0f;
 
     public float m_CanJumpTime = 0.2f;
     float m_JumpTimer;
@@ -34,11 +35,14 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D pfb_bullet;
     public Rigidbody2D pfb_bullet2;
-    public Vector2 bulletSpeed = new Vector2(5, 0);
+    public Vector2 bulletSpeed = new Vector2(15, 0);
 
     bool change = false;
     float ShootInterval = 1.0f;  //控制射速
     float ShootTime = 0;
+
+    public int fuel = 0;
+    public Text fuelNum;
 
     void Awake()
     {
@@ -124,6 +128,24 @@ public class PlayerController : MonoBehaviour
         CheckShoot();
     }
 
+    void UpdateUI()
+    {
+        fuelNum.text = fuel.ToString();
+    }
+
+    void GetFuel()
+    {
+        fuel = 1;
+        UpdateUI();
+    }
+
+    void UseFuel()
+    {
+        //Debug.Log("use");
+        fuel -= 1;
+        UpdateUI();
+    }
+
     void ChangeBullet()
     {
         if (Input.GetButtonDown("Change"))
@@ -135,7 +157,7 @@ public class PlayerController : MonoBehaviour
     void CheckShoot()
     {
         ShootTime += Time.deltaTime;
-        if(Input.GetButtonDown("Shoot") && ShootTime >= ShootInterval)
+        if (Input.GetButtonDown("Shoot") && ShootTime >= ShootInterval)
         {
             ShootTime = 0;
             Rigidbody2D obj;

@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     int curLive;
 
     public int maxShield = 1;
-    int initShield = 0;
+    int initShield = 1;
     int curShield;
 
     float ChargeInterval = 15.0f;
@@ -21,6 +21,7 @@ public class Health : MonoBehaviour
 
     public Text liveNum;
     public Text dnaNum;
+    public Text shieldNum;
 
     Renderer myRender;
     public int blinks;
@@ -39,11 +40,13 @@ public class Health : MonoBehaviour
         ChargeShield();
     }
 
+
     //更新UI
     void UpdateUI()
     {
         liveNum.text = curLive.ToString();
         dnaNum.text = DNA.ToString();
+        shieldNum.text = curShield.ToString();
     }
 
     //获得生命点
@@ -57,6 +60,7 @@ public class Health : MonoBehaviour
     void GetShield(int shield)
     {
         curShield = Mathf.Clamp(curShield + shield, 0, maxShield);
+        UpdateUI();
     }
 
     //获得DNA
@@ -69,43 +73,51 @@ public class Health : MonoBehaviour
     //升级护盾冷缺时间（减少冷却时间）
     void UpgradeShield1()
     {
-        if (ChargeInterval == 15.0f)
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            if(DNA >= 20)
+            if (ChargeInterval == 15.0f)
             {
-                DNA -= 20;
-                ChargeInterval -= 5.0f;
+                if (DNA >= 20)
+                {
+                    DNA -= 20;
+                    ChargeInterval -= 5.0f;
+                }
+            }
+            else if (ChargeInterval == 10.0f)
+            {
+                if (DNA >= 30)
+                {
+                    DNA -= 30;
+                    ChargeInterval -= 5.0f;
+                }
             }
         }
-        else if(ChargeInterval == 10.0f)
-        {
-            if (DNA >= 30)
-            {
-                DNA -= 30;
-                ChargeInterval -= 5.0f;
-            }
-        }
+
     }
 
     //升级护盾最高充能点数
     void UpgradeShield2()
     {
-        if(maxShield == 1)
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            if(DNA >= 30)
+            if (maxShield == 1)
             {
-                DNA -= 30;
-                maxShield += 1;
+                if (DNA >= 30)
+                {
+                    DNA -= 30;
+                    maxShield += 1;
+                }
+            }
+            else if (maxShield == 2)
+            {
+                if (DNA >= 40)
+                {
+                    DNA -= 40;
+                    maxShield += 1;
+                }
             }
         }
-        else if(maxShield == 2)
-        {
-            if (DNA >= 40)
-            {
-                DNA -= 40;
-                maxShield += 1;
-            }
-        }
+
     }
 
     //护盾充能
@@ -117,30 +129,42 @@ public class Health : MonoBehaviour
             if (ChargeTime >= ChargeInterval)
             {
                 ChargeTime = 0;
-                GetShield(1); ;
-            } 
+                GetShield(1);
+            }
         }
     }
 
     //玩家受伤
     public void BeDamaged(int damage)
     {
-        if(curShield > 0)
+        if (curShield > damage)
         {
             curShield -= damage;
             BlinkPlayer(blinks, time);
-        }
-        else if(curLive > 0)
-        {
-            curLive -= damage;
-            BlinkPlayer(blinks, time);
-        }
-        else
-        {
-            BeDie();
+            UpdateUI();
+            return;
         }
 
-        UpdateUI();
+        if (curShield <= damage)
+        {
+            int rest = damage - curShield;
+            curShield -= curShield;
+            if (curLive > rest)
+            {
+                curLive -= rest;
+                BlinkPlayer(blinks, time);
+                UpdateUI();
+                return;
+            }
+            if (curLive <= rest)
+            {
+                curLive -= curLive;
+                BlinkPlayer(blinks, time);
+                UpdateUI();
+                BeDie();
+            }
+        }
+
     }
 
     //受伤害闪烁
@@ -151,7 +175,7 @@ public class Health : MonoBehaviour
 
     IEnumerator DoBlink(int numBlinks, float seconds)
     {
-        for(int i = 0; i <= numBlinks; i++)
+        for (int i = 0; i <= numBlinks; i++)
         {
             myRender.enabled = !myRender.enabled;
             yield return new WaitForSeconds(seconds);

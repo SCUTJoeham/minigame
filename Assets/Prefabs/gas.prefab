@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 335221892776126373}
   - component: {fileID: 335221892776126371}
   m_Layer: 0
-  m_Name: gas_0
+  m_Name: gas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -51457793
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2827147315405241775, guid: 34d9e96042f471d4fab04fd21be68d36,
     type: 3}

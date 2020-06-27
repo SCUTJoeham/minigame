@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 210162761653211724}
   - component: {fileID: 107109737420856815}
   - component: {fileID: 8562143506812316839}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: virus_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -51457793
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bead47d786e844adba7899d02e8851eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -163,5 +163,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b90174ee3958224d92e68894a6262ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  my_player: {fileID: 7157141225852409057, guid: aeb200d5dcbe3964bb8ee9bdb0a35493,
-    type: 3}
